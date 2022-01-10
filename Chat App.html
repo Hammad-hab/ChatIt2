@@ -106,12 +106,12 @@
             user = $("#Se").val()
         })
         $("#Send").click(function () {
-            var Req = new request('Php.php', 'POST', $('#Message').val(), user)
+            var Req = new request('localhost/Php.php', 'POST', $('#Message').val(), user)
             Req.sendReq('#After')
         })
         setInterval(() => {
             $.ajax({
-                url: 'Php.php',
+                url: 'localhost/Php.php',
                 type: 'POST',
                 data: { 'Mess': $('#Message').val(), 'client': user, 'RequestType': 'GET' },
                 success: function (data) {
