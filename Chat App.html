@@ -111,7 +111,7 @@
         })
         setInterval(() => {
             $.ajax({
-                url: 'localhost/Php.php',
+                url: 'http://localhost/Php.php',
                 type: 'POST',
                 data: { 'Mess': $('#Message').val(), 'client': user, 'RequestType': 'GET' },
                 success: function (data) {
