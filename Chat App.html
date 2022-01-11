@@ -110,7 +110,7 @@
         })
         $("#Send").click(function () {
             $.ajax({
-                url: 'Php.php',
+                url: 'https://127.0.0.1/Php.php',
                 data: { 'Mess': $('#Message').val(), 'client': user, 'method': 'Throw' },
                 type: 'POST',
                 success: function () {
