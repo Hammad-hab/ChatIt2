@@ -16,7 +16,7 @@ elseif ($UserName === "User2") {
     $UserB = "You";
 };
 
-$Link = mysqli_connect("localhost","root", "","server");
+$Link = mysqli_connect("127.0.0.1","root", "","server");
 if ($Method === "Fetch") {
     for ($i= 0; $i < 1000; $i++) { 
         $Veiw1 = mysqli_query($Link, "SELECT `Message by User 1`FROM `message holder` WHERE `id` = '{$i}' ");
