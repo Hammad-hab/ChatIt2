@@ -10,7 +10,9 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
     <script src="jquery-2.1.1.min.js"></script>
-    <script src="Main.js"></script>
+    <link rel="shortcut icon" href="باتیں.png" type="image/x-icon">
+    <!-- <script src="Main.js"></script> -->
+    <title>باتیں</title>
     <style>
         textarea {
             width: 90%;
@@ -48,16 +50,17 @@
         a {
             margin-top: 10px;
         }
+
         marquee {
             opacity: 0.5;
             cursor: pointer;
         }
+
         marquee::selection {
             background-color: transparent;
         }
-       
     </style>
-    <marquee behavior="">Welcome to ChatIt a free two-way chat app.</marquee>
+    <marquee behavior="">Welcome to "باتیں" a free two-way chat app.</marquee>
 </head>
 
 <body>
@@ -106,19 +109,26 @@
             user = $("#Se").val()
         })
         $("#Send").click(function () {
-            var Req = new request('localhost/Php.php', 'POST', $('#Message').val(), user)
-            Req.sendReq('#After')
+            $.ajax({
+                url: 'Php.php',
+                data: { 'Mess': $('#Message').val(), 'client': user, 'method': 'Throw' },
+                type: 'POST',
+                success: function () {
+
+                }
+            })
+            $('#Message').val('')
         })
         setInterval(() => {
             $.ajax({
-                url: 'http://localhost/Php.php',
+                url: 'Php.php',
                 type: 'POST',
-                data: { 'Mess': $('#Message').val(), 'client': user, 'RequestType': 'GET' },
+                data: { 'Mess': $('#Message').val(), 'client': user, 'method': 'Fetch' },
                 success: function (data) {
                     $('#After').html(data)
                 }
             })
-        }, 3000);
+        }, 300);
         $("#Emoj").change(function () {
             DrawAndGet()
         })
@@ -131,8 +141,22 @@
             var TrimedBs = Trimed2 += Trimed1
             $("#Message").val('' + TrimedBs + '')
         }
-
+        $("#Message").on('keypress', function (event) {
+            if (event.charCode === 13) {
+                event.preventDefault()
+                $('#Send').trigger('click')
+            }
+        })
+        setInterval(() => {
+            if ($('#Message').val()) {
+                document.getElementById('Send').disabled = false
+            }
+            else {
+                document.getElementById('Send').disabled = true 
+            }
+        }, 1);
     </script>
+
 </body>
 
 </html>
